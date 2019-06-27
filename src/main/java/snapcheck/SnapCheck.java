@@ -58,10 +58,28 @@ public class SnapCheck implements SnapCheckDatabase{
 		}
 	}
 	/*
+	 *  add one payment object to database
+	 */
+	public Boolean addOnePayment(PaymentObject payment) throws InterruptedException{
+		//get random number between 1 and 1000
+		try {
+			Document doc = new Document();
+			doc.put("paymentNumber", payment.getPaymentNumber());
+			doc.put("amount", payment.getAmount());
+			doc.put("date", payment.getDate().toString());
+			collection.insertOne(doc);
+			System.out.println("Document inserted successfully");
+		}catch(Exception e) {
+			System.out.println("The error that you recieved is " + e);
+			return(false);
+		}
+		return(true);
+	}
+	/*
 	 * Sorting Algorithm 1 based off of Bubble Sort
 	 * 
 	 */
-	public Object[] SortOne(int n){
+	public Document[] SortOne(int n){
 		Document[] res = new Document[n];
 		FindIterable<Document> cursor = collection.find().limit(n);
 		int i = 0;
@@ -92,7 +110,7 @@ public class SnapCheck implements SnapCheckDatabase{
 	/*
 	 * Sorting Algorithm 2 based off of Selection Sort
 	 */
-	public Object[] SortTwo(int n){
+	public Document[] SortTwo(int n){
 		Document[] res = new Document[n];
 		FindIterable<Document> cursor = collection.find().limit(n);
 		int i = 0;
