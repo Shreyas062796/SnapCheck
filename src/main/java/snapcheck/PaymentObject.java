@@ -1,5 +1,6 @@
 package snapcheck;
 import java.text.*;
+import java.util.Date;
 /*
  * A Class for PaymentObject
  */
@@ -12,12 +13,12 @@ public class PaymentObject {
 	 */
 	private int paymentNumber;
 	private int amount;
-	private SimpleDateFormat date;
+	private Long date;
 	
-	public PaymentObject(int paymentNumber,int amounts, SimpleDateFormat date) {
+	public PaymentObject(int paymentNumber,int amounts, Long date2) {
 		this.paymentNumber = paymentNumber;
 		this.amount = amount;
-		this.date = date;
+		this.date = date2;
 	}
 	/*
 	 * Getter for getting paymentNumber or ID
@@ -35,7 +36,7 @@ public class PaymentObject {
 	/*
 	 * Getter for getting Date
 	 */
-	public SimpleDateFormat getDate() {
+	public Long getDate() {
 		return(this.date);
 	}
 }
