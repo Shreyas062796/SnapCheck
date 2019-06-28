@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,13 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class SnapCheckController {
 	
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity addPayment(@RequestBody JSONObject body) throws InterruptedException {
-		PaymentObject obj = new PaymentObject(Integer.parseInt(body.get("paymentNumber").toString()),Integer.parseInt(body.get("amounts").toString()),Long.parseLong(body.get("date").toString()));
+	public int addPayment(@RequestParam Integer paymentNumber,@RequestParam Integer amount,@RequestParam Long date) throws InterruptedException {
+		PaymentObject obj = new PaymentObject(paymentNumber,amount,date);
 		Boolean didAdd = new SnapCheck().addOnePayment(obj);
 		if(didAdd) {
-			return (ResponseEntity) (ResponseEntity.status(HttpStatus.CREATED));
+			return HttpStatus.CREATED.value();
 		}
-		return (ResponseEntity) (ResponseEntity.status(HttpStatus.NO_CONTENT));
+		return HttpStatus.NO_CONTENT.value();
 	}
 }

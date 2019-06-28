@@ -14,8 +14,6 @@ public class SnapCheckTest {
 	public void testSortOne() {
 		Document[] sortone = obj.SortOne(5);
 		Document[] test = sortone;
-		Collections.sort(test, (test1,test2) -> {
-			
-		});
+		test.
 	}
 }
